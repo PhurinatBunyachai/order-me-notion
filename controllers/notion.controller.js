@@ -59,6 +59,63 @@ const notionController = {
         error: error.message 
       });
     }
+  },
+  
+  /**
+   * Get order database information from Notion
+   * @param {Object} req - Express request object
+   * @param {Object} res - Express response object
+   */
+  getOrderDatabase: async (req, res) => {
+    try {
+      const databaseId = process.env.APP_NOTION_ORDER_DATABASE_ID;
+      const { query } = req.body;
+      
+      if (!databaseId) {
+        return res.status(400).json({ 
+          success: false, 
+          message: 'Order database ID is not configured in environment variables' 
+        });
+      }
+
+      const database = await notionModel.getDatabase(databaseId, query);
+      res.status(200).json(database);
+    } catch (error) {
+      console.error('Error fetching order database:', error);
+      res.status(500).json({ 
+        success: false, 
+        message: 'Failed to fetch order database', 
+        error: error.message 
+      });
+    }
+  },
+  
+  /**
+   * Get page information from Notion
+   * @param {Object} req - Express request object
+   * @param {Object} res - Express response object
+   */
+  order: async (req, res) => {
+    try {
+        const { pageObj } = req.body;
+      
+      if (!pageObj) {
+        return res.status(400).json({ 
+          success: false, 
+          message: 'Page ID is required' 
+        });
+      }
+
+      const page = await notionModel.order(pageObj);
+      res.status(200).json(page);
+    } catch (error) {
+      console.error('Error fetching page:', error);
+      res.status(500).json({ 
+        success: false, 
+        message: 'Failed to fetch page', 
+        error: error.message 
+      });
+    }
   }
 };
 

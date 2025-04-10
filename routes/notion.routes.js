@@ -8,4 +8,10 @@ router.get('/init', notionController.initializeNotion);
 // Route to interact with Notion databases
 router.post('/database', notionController.getDatabase);
 
+// Route to interact with Notion order database
+router.post('/database/order', notionController.getOrderDatabase);
+
+// Route to retrieve a Notion page
+router.post('/page', notionController.order);
+
 module.exports = router;
