@@ -39,6 +39,9 @@ const notionController = {
       if(type==='product'){
          databaseId = process.env.APP_NOTION_PRODUCT_DATABASE_ID;
       }
+      if(type==='store'){
+         databaseId = process.env.APP_NOTION_STORE_INFO_DATABASE_ID;
+      }
       if (!databaseId) {
         return res.status(400).json({ 
           success: false, 
