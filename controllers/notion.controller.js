@@ -42,6 +42,9 @@ const notionController = {
       if(type==='store'){
          databaseId = process.env.APP_NOTION_STORE_INFO_DATABASE_ID;
       }
+      if(type==='order-history'){
+         databaseId = process.env.APP_NOTION_DATABASE_ID;
+      }
       if (!databaseId) {
         return res.status(400).json({ 
           success: false, 
